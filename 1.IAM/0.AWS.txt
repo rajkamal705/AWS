@@ -1,0 +1,146 @@
+=> Intro:
+-> Aws has a region all around the world.
+-> A region is a collection of data centers.
+-> Most Aws services are region scoped. It reduce latency.
+-> Each availability zone is a collection of one or more data centers. They are connected with high 
+   bandwidth and low latency network.
+
+=> AWS has global services:
+1> Identity and Access Management (IAM).
+2> Route 53 (DNS service)
+3> Cloud Front(Content Delivery Network)
+4> WAF: Web Application Firewall
+
+Note: Route 53 service are global, so we don't have to manually choose region.
+
+1> IAM (Identity Access Management):
+
+=> IAM: Users And Groups
+-------------------------
+-> IAM is a global service.So, no region need to be selected.
+-> Root account created by default, shouldn't be used or shared.
+-> users are people in our organizations and can be grouped.
+-> Groups only contain users not other group.
+-> a user can belong to multiple groups.
+
+Note: for every user we add key:value pair called tags.
+
+=> IAM: Permissions:
+--------------------
+-> Users or groups can be assigned JSON documents called policies.
+-> These policies define the permissions of the user.
+-> In AWS, you apply the least privilege principal: don't give a more permission than a user need.
+-> JSON:
+   {
+    "Version": "2025-10-05",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "ec2:Describe*",
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "elasticloadbalancing:Describe*",
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "cloudwatch: ListMetrics",
+                "cloudwatch: GetMetricsStatistics",
+                "cloudwatch:Describe*"
+            ],
+            "Resource": "*"
+        }
+    ]
+   }
+
+=> IAM Policies Inheritance:
+----------------------------
+Q> What is the use of Policy in Aws?
+ans: Policies are used to manage access to resources. Policies are essentially a JSON documents that specify permissions.
+
+-> If Policy are assigned to any group then every users of that group will have that policy.
+-> For adding policy to single user, create inline policy.
+
+=> IAM Policies Structure:
+---------------------------
+JSON:
+{
+    "Version" : "2025-05-05",
+    "Id": "S3-Account-Permissions",
+    "Statement": [
+        {
+            "Sid": "1",
+            "Effect": "Allow",
+            "principal": {
+                "AWS": ["arn:aws:iam::1234567889:root"]
+            },
+            "Action": [
+                "S3: GetObject",
+                "S3: PutObject"
+            ],
+            "Resource": ["arn:aws:s3:::mubucket/*"]
+        }
+    ]
+}
+
+=> An IAM policy includes:
+-> Version: The policy language version, usually "2012-10-17".
+-> Id: An optional identifier for the policy.
+-> Statement: One or more statements defining permissions.
+
+-> Each statement contains important parts:
+1> Sid: Statement ID, an optional identifier for the statement.
+2> Effect: Specifies whether the statement allows or denies access to certain APIs. Common values are "Allow" or "Deny".
+3> Principal: Defines the accounts, users, or roles to which the policy applies. For example, it can specify the root account of your AWS account.
+4> Action: A list of API calls that are allowed or denied based on the effect.
+5> Resource: Specifies the resources to which the actions apply, such as an S3 bucket.
+6> Condition: Optional conditions that specify when the statement applies.
+
+
+=> AWS CLI: (Aws command line interface):
+-> To directly access and manage resource on aws using command, we use AWS CLI.
+-> install aws cli.
+
+=> Create access key:
+-> go to users -> choose users -> create access key
+
+=> How to configure Aws with CLI:
+step1> in cmd enter: aws configure
+step2> Enter access key: (created for users)
+step3> Enter secret access key: 
+step4> choose region: ap-south-1
+step5> enter: aws iam list-users
+
+Note: Alternative: you can use cloudshell, which is same as CLI provided by aws.
+
+=> IAM Roles:
+----------------
+=> IAM Roles for services:
+-> Some aws service will need to perform actions on your behalf. To do so we will assign permission(or policies) to aws services using IAM Role.
+   EX: EC2 instance roles, lambda function roles, roles for cloud formation.
+
+=> IAM Security Tools:
+----------------
+1> IAM Credentials Report: (account-level):
+-> a report that lists all your account user and their Credentials.
+
+2> IAM Access Advisor(user-level):
+-> Access Advisor shows which services are assigned to user and when those services were last accessed.
+-> you can use this permission to revise your services.
+
+-> in the left hand side: 1> Go to access Report -> 2> Go to Credentials Report and Download -> 3> you will see all details in excel sheet.
+
+=> SUMMARY:
+-----------
+1> Users: mapped to a physical user, has a password for aws console.
+2> Groups: contains users only
+3> Policies: JSON document that outlines permissions for users or groups.
+4> Roles: For EC2 instances or AWS services.
+5> Security: MFA + Password Policy.
+6> AWS CLI: manage your aws services using command line.
+7> AWS SDK: manage your aws services using programming language.
+8> Access Keys: access AWS using CLI or SDK.
+9> Audit: IAM Credentials Reports & IAM Access Advisor.

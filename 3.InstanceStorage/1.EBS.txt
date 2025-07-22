@@ -1,0 +1,34 @@
+=> EBS (Elastic Block Store):
+-> EBS is a network drive you can attach to your instances when they run.
+-> It allows your instances to persist data, even after their termination.
+-> They can only be mounted to one instance at a time(at the CCP level).
+-> They are bound to a specific availability zone.
+-> Free tier: 30 GB free EBS storage.
+
+=> More detail:
+-> It's a network drive(not physical drive).
+-> It uses the network to communicate the instance, which means there might be a latency a bit.
+-> It can be detached with one instance and attached to other very quickly.
+-> It is locked to single availability zone. To move a volume across, you have to snapshot it first.
+-> Have a provisioned capacity: you can get billed for that. you can increase the capacity of the drive over time.
+-> a single instance can attached with one or more EBS.
+
+=> EBS -> Delete on termination attribute.
+-> attribute enabled or disabled is marked using checkbox.
+
+=> EBS snapshot:
+-> Make a backup(snapshot) of your EBS volume at a point in time.
+-> not necessary to detach volume to do snapshot, but recommended.
+-> can copy snapshots across AZ or Region.
+ex: instance1: asia-a1(EBS 50gb) ------------> snapshot of EBS can connect across the region -----------> Instance2: asia a2(EBS 2gb)
+
+=> EBS snapshot feature:
+1> EBS snapshot Archive:
+-> move a snapshot to an "archive tier" that is 75% cheaper.
+-> Takes between 24hr to 72hr for restoring the archive.
+
+2> Recycle bin for EBS snapshot:
+-> deleted snapshot are sent to Recycle bin so that you can retrieve later(1day to 1 year).
+
+3> FSR(Fast snapshot Restore):
+-> Forceful initialization of snapshot to have no latency on the first use.
