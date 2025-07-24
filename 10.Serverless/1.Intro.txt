@@ -1,0 +1,33 @@
+Q> What is Serverless?
+ans: Serverless is a cloud computing model where we write and deploy code on server without managing it's underlying
+     complexity(like servers and container management).
+
+=> Key characteristics of Serverless:
+-> No server management manually
+-> Autoscaling: code scales automatically based on incoming requests.(Ex: From 10 to 10 million).
+-> Event driven: functions execute in response to event(Ex: API call, file upload, Db Change etc.)
+-> micro billing: you are billed only for the exact time your code runs.
+-> If there is no Api call -> No function execution -> server will be in sleep mode -> once, api call will be made -> server start
+   only for that time and cost will be billed for that exact time only.
+
+=> What is Aws lambda:
+----------------------
+-> AWS lambda is Amazon serverless compute service, It allows you run your backend without actually provisioning your server.
+
+
+Q> What actually happen in serverless?
+-> suppose i deploy my backend using serverless.
+-> initially my server will be in sleep state and there will be no billing for that time.
+-> once someone started using resources -> api call will be made -> server will start running -> there is slight timegap in 
+   millisec is taken to awake from sleep state to running state.
+-> Once user stop using resources -> server will again go in sleep mode.
+-> bec of this, Serverless don't manage the state. To manage state, we have to use reddis or something.
+
+
+=> lambda
+----------
+-> Suppose you upload your code directly or use some deployment tools like serverless framework.
+-> Lambda will waits for an event call:
+   It gets triggered by: 1> API Gateway(For Http req) 2> DynamoDb 3> cloudwatch 4>  SNS & SQS(for message)
+-> lambda runs your function: automatically scale if multiple function calls are made.
+-> lambda stops and clean up the environment after a short idle period if there is no event or funtions call(to save bills).

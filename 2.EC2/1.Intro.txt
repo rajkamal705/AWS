@@ -1,0 +1,101 @@
+1> Billing and cost management:
+-> you can set your Budget, like zero-Spend Budget, monthly-Spend Budget etc.
+
+2> Amazon EC2: (Elastic compute cloud).
+---------------------------------------
+-> It mainly consist the capability of :
+1> Renting virtual machine(EC2)
+2> Storing data on virtual drive(EBS)
+3> Distributing load across machines(ELB)
+4> Scaling the services using auto scaling group(ASG)
+
+=> EC2 sizing and configuration option:
+-----------------------------------------
+-> EC2 sizing and configuration determines how much compute Power, memory and storage your virtual server will have.
+-> EC2 instance types that we will be using is t2.micro. It's free upto 750 hr per month.
+-> While creating EC2 instance it also ensure the following things:
+   1> Network Card: speed of the card, public IP address.
+   2> Firewall rules: Security Group.
+   3> Bootstrap Script(configure at first launch): EC2 user data.
+   -> User data script run once when instance start
+   -> EC2 User data is used to automate 1> installing updates 2> updating software, downloading common files from the internet.
+-> user data script will be something like:
+   #!/bin/bash
+   yum update -y
+   yum install -y httpd
+   systemctl enable httpd
+   systemctl start httpd
+   echo "<h1>Hello from EC2</h1>" > /var/www/html/index.html
+
+-> Instance type: m5.2xlarge -> here, m determine class and 5 determine generation. so this is 5th generation, m class instance type.
+
+3> EC2 Instance Types:
+-----------------------
+
+4> Security Group:
+---------------------
+-> A security group is like firewall for EC2 insance. It controls inbound(What trafic is allowed to enter) and 
+   outbound(what traffic is allowed to leave) for EC2 instance.
+-> It's a set of firewall rules attached to EC2 instances.
+-> This defines who can connect to the instances and what ports/protocols can be used.
+-> Security groups are stateful, meaning: 
+   1> if inbound allows a connection(like SSH from your laptop), return traffic is automatically allowed.
+   2> you don't need to manually allow outbound for the reply.
+
+1> Inbound Rules:
+-----------------
+-> This controls how much traffic is allow to your EC2 instance from network or other aws resources.
+| Type   | Protocol | Port Range | Source         | Description         |
+| ------ | -------- | ---------- | -------------- | ------------------- |
+| SSH    | TCP      | 22         | 203.0.113.0/24 | Allow SSH access    |
+| HTTP   | TCP      | 80         | 0.0.0.0/0      | Allow web access    |
+| Custom | TCP      | 8080       | 10.0.0.0/16    | Allow from VPC only |
+
+
+2> outbound Rules:
+-------------------
+-> This controls, What your Ec2 instance is allowed to connect outside.
+-> Default outbound rules:
+| Type | Protocol | Port Range | Destination | Description        |
+| ---- | -------- | ---------- | ----------- | ------------------ |
+| All  | All      | All        | 0.0.0.0/0   | Allow all outbound |
+
+-> This means your EC2 can make any outbound requests like:
+1> Connecting to the internet
+2> hitting public api.
+3> sending logs to cloud watch
+
+-> you can restrict it if needed, for ex: allow to specific IP or port.
+
+5> IPV4 and IPV6
+-----------------
+Q> what is IP?
+ans: An IP Address is unique identifier assigned to every device connected to the internet.
+     It works like postal address, which allow data packets to reach destination.
+
+-> IPv4 and IPv6 are two versions of the Internet Protocol (IP).
+
+1> IPv4:
+-> Uses 32 bit Address, It allows 4.3 billion unique addresses.
+-> Format: Decimal format contains 4 number separated by dot. each number range (0-255). Each part is called and octet(8 bit).
+   Ex: 192 . 168 . 0 . 1
+-> limitations: 4.3 billion addresses are not enough due to explosive internet growth (IoT, mobile, etc.).
+
+2> IPV6:
+-> Uses 128-bit addresses, allowing approximately 340 undecillion addresses (massively more than IPv4).
+-> Format: Hexadecimal, written as 8 groups of 4 hexadecimal digits, separated by colons :
+   Ex: 2001:0db8:85a3:0000:0000:8a2e:0370:7334 -> remove leading zeros 2001:db8:85a3:0:0:8a2e:370:7334
+      -> Replace consecutive zero group with :: -> 2001:db8:85a3::8a2e:370:7334
+
+
+5> SSH:
+---------
+-> SSH stands for secure shell.
+-> It is a cryptographic network protocol that allows you to securely access and manage remote computers over unsecured network.
+-> It's commonly used to :
+   -> Remotely log into server like EC2 instance.
+   -> Execute commands.
+   -> Transfer files securely.
+
+ 
+
