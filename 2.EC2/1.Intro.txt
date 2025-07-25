@@ -112,7 +112,7 @@ ans: An IP Address is unique identifier assigned to every device connected to th
 1> IPv4:
 -> Uses 32 bit Address, It allows 4.3 billion unique addresses.
 -> Format: Decimal format contains 4 number separated by dot. each number range (0-255). Each part is called and octet(8 bit).
-   Ex: 192 . 168 . 0 . 1
+   Ex: 192.168.0.1
 -> limitations: 4.3 billion addresses are not enough due to explosive internet growth (IoT, mobile, etc.).
 
 2> IPV6:
@@ -121,6 +121,21 @@ ans: An IP Address is unique identifier assigned to every device connected to th
    Ex: 2001:0db8:85a3:0000:0000:8a2e:0370:7334 -> remove leading zeros 2001:db8:85a3:0:0:8a2e:370:7334
       -> Replace consecutive zero group with :: -> 2001:db8:85a3::8a2e:370:7334
 
+=> Important points about security groups:
+-> They can be attached to multiple instances; there is not a one-to-one relationship between security groups and instances.
+-> An instance can have multiple security groups attached.
+-> Security groups are locked down to your region and VPC combination. If you switch regions or create another VPC, you must 
+   create new security groups.
+-> Security groups live outside the EC2 instance. If traffic is blocked, the EC2 instance does not even see it; it is a 
+   firewall external to the instance.
+
+=> By now, you should have a solid understanding of security groups. For the exam, you need to know the following ports:
+-> Port 22 for SSH (Secure Shell), used to log into Linux EC2 instances.
+-> Port 21 for FTP (File Transfer Protocol), used to upload files.
+-> Port 22 also for SFTP (Secure File Transfer Protocol), which uses SSH for secure file transfer.
+-> Port 80 for HTTP, used to access unsecured websites.
+-> Port 443 for HTTPS, used to access secured websites.
+-> Port 3389 for RDP (Remote Desktop Protocol), used to log into Windows instances.
 
 5> SSH:
 ---------
