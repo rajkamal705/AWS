@@ -3,6 +3,7 @@
 
 2> Amazon EC2: (Elastic compute cloud).
 ---------------------------------------
+-> It provides infrastructure as a servive(IaaS) on aws.
 -> It mainly consist the capability of :
 1> Renting virtual machine(EC2)
 2> Storing data on virtual drive(EBS)
@@ -12,6 +13,7 @@
 => EC2 sizing and configuration option:
 -----------------------------------------
 -> EC2 sizing and configuration determines how much compute Power, memory and storage your virtual server will have.
+-> EC2 allows renting virtual machines called instances, with customizable OS, RAM, CPU, storage and network options.
 -> EC2 instance types that we will be using is t2.micro. It's free upto 750 hr per month.
 -> While creating EC2 instance it also ensure the following things:
    1> Network Card: speed of the card, public IP address.
@@ -31,6 +33,38 @@
 
 3> EC2 Instance Types:
 -----------------------
+1> Compute optimized instances:
+-> compute optimized instances are designed for heavy computing tasks require high level of procsssor performance:
+-> Use cases:
+   -> Batch processing of data.
+   -> media transcoding.
+   -> high performance web servers.
+   -> High performance computing. 
+   -> Machine learning.
+   -> dedicated gaming server. 
+-> All compute optimized instances currently have names starting with C, such as C5, C6, and so on.
+
+2> Memory optimized instances:
+-> Memory optimized instances provide fast performance for workloads that procss large datasets in memory(RAM).
+-> Use Cases:
+   -> High performance relational or non relational databases.
+   -> In memory databases.
+   -> Distributed web scale cache stores.
+   -> Business intelligence application.
+   -> Real time processing of big unstructured data.
+-> These instances often belong to the R series (where R stands for RAM)
+
+3> Storage optimized instances:
+-> storage optimized instances are ideal when accessing large datasets on local storage.
+-> Use cases:
+   -> High frequency online transactional processing system.
+   -> Relational and no sql databases.
+   -> cache for in-memory databases.
+   -> Data warehousing applications
+   -> Distributed file system.
+-> Storage optimized instances in AWS typically start with I, G, or H1.
+
+-> To know about diff types of EC2 instances and it's use, follow this link: https://aws.amazon.com/ec2/instance-types/
 
 4> Security Group:
 ---------------------
