@@ -146,5 +146,25 @@ ans: An IP Address is unique identifier assigned to every device connected to th
    -> Execute commands.
    -> Transfer files securely.
 
+=> SSH in detail:
+-> When EC2 instance was created, Aws generated a key-pair. After that
+-> a public key was saved in the instance at: ~/.ssh/authorized_keys and
+-> A private key (raj_key.pem) was downloaded to your system.
+
+-> so, when we run "ssh -i .\raj_key.pem ec2-user@35.154.4.18" this command, 
+   1> SSH client uses the private key to prove your identity.
+   2> The EC2 instance matches it with the public key stored in the instance
+   3> If they match → Access granted
+
+=> what does this output mean: The authenticity of host '35.154.4.18' can't be established...
+-> This is a security warning.
+-> It's the first time you're connecting to this server.
+-> So your SSH client doesn’t have the EC2 instance's host fingerprint in its known hosts file.
+-> When you type yes, it adds the host to your known hosts file:
+
+=> Add Role:
+----------------
+
+
  
 
