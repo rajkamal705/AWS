@@ -86,7 +86,7 @@ JSON:
     ]
 }
 
-=> An IAM policy includes:
+=> An IAM policy JSON docs includes:
 -> Version: The policy language version, usually "2012-10-17".
 -> Id: An optional identifier for the policy.
 -> Statement: One or more statements defining permissions.
@@ -98,7 +98,6 @@ JSON:
 4> Action: A list of API calls that are allowed or denied based on the effect.
 5> Resource: Specifies the resources to which the actions apply, such as an S3 bucket.
 6> Condition: Optional conditions that specify when the statement applies.
-
 
 => AWS CLI: (Aws command line interface):
 -> To directly access and manage resource on aws using command, we use AWS CLI.

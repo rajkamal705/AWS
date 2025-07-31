@@ -14,7 +14,10 @@
 -> a single instance can attached with one or more EBS.
 
 => EBS -> Delete on termination attribute.
+-> This shows that on deleting instance, EBS volume attached with that instances will also get deleted, if Delete on termination 
+   is marked yes in that EBS volume.
 -> attribute enabled or disabled is marked using checkbox.
+-> useCase: preserve root volume when instance is terminated.
 
 => EBS snapshot:
 -> Make a backup(snapshot) of your EBS volume at a point in time.
@@ -29,6 +32,7 @@ ex: instance1: asia-a1(EBS 50gb) ------------> snapshot of EBS can connect acros
 
 2> Recycle bin for EBS snapshot:
 -> deleted snapshot are sent to Recycle bin so that you can retrieve later(1day to 1 year).
+-> It allows us to recover snapshot that i deleted accidently.
 
 3> FSR(Fast snapshot Restore):
 -> Forceful initialization of snapshot to have no latency on the first use.

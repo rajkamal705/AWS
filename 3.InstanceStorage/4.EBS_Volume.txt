@@ -1,8 +1,36 @@
 => EBS volume:
 -> EBS volume comes in 6 type:
-   - gp2/gp3 (SSD): General purpose SSD volume that balaces price and performance for wide variety of workloads.
+   - gp2/gp3 (SSD): General purpose SSD volume that balance price and performance for wide variety of workloads.
    - io1 / io2 Block Express (SSD): Highest performance SSD volume for mission critical low latency or high throughput workloads.
    - st1 (HDD): Low cost HDD volume designed for frequently accessed, throughput intensive workloads.
+   - sc1: Lowest-cost HDD volume designed for less frequently accessed workloads.
+
+=> Defining an EBS volume:
+--------------------------
+-> Several factors define an EBS volume, including size, throughput, and IOPS.
+-> IOPS: Input/Output operation per second.
+-> For EC2 instances, only gp2, gp3, io1 and io2 volumes can be used as boot volumes, meaning where the root operating system runs.
+
+=> General purpose SSD volumes: gp2 and gp3:
+--------------------------------------------
+1> gp2:
+-> cost effective storage with low latency.
+-> suitable for system boot volumes, virtual desktops, development and test environment.
+-> size range: 1GB to 1TB.
+
+2> GP3: 
+-> The newer generation of volume.
+-> provides a baseline of 3000 IOPS and a throughput of 125 megabytes per sec.
+-> IOPS can be increased upto 16000 and throughput upto 1000 megabytes per sec.
+
+Note: smaller GP2 volumes can burst upto 3000 IOPS. Increasing the volume size increase IOPS at a rate of 3 IOPS per gigabytes.
+
+=> Summary of gp2 and gp3
+--------------------------
+-> Both are cost effective storage options with low latency.
+-> gp3 allows independent scaling of IOPS and throughput.
+-> gp2 links volume size and IOPS together.
+
 
 
 

@@ -7,3 +7,8 @@
    - Good for buffer/cache/scratch data/ temporary content
    - Risk of data fail in hardware fails
    - Backups and Replication are your responsibility,
+
+=> Appropriate Use Cases for EC2 Instance Store:
+-> If you have a buffer, a cache, or you want to store scratch data or temporary content, this would be a great place to do so.
+   However, it is not suitable for long-term storage. 
+-> For long-term storage, Elastic Block Store (EBS) is a great option.
