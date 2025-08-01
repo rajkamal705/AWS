@@ -1,0 +1,61 @@
+=> EFS(Elastic File System):
+---------------------------
+-> Amazon EFS is managed by NFS(Network File System).
+-> since, it is Network File System, we can mount EFS on many EC2 instance simultaneously.
+-> These EC2 instances can reside in different availability zone.
+-> EFS is highly scalable, but expensive.
+-> The pricing model is pay per use.
+
+=> Architecture and connectivity:
+---------------------------------
+-> you create an EFS file system and associate with any security group.
+-> It can connect to many instances(in diff region) simultaneously.
+-> This multi-AZ connectivity enables shared access across distributed instances.
+
+=> Use cases and compatibility:
+-------------------------------
+-> EFS is suitable for content management, web serving, data sharing, and application like workpress.
+-> Internally it uses NFS(Network File System) protocol.
+-> To control access we configure security groups with EFS.
+-> It is important to note that EFS is only compatible with Linux-based AMIs and does not support Windows.
+-> Encryption at rest can be enabled using aws KMS(Key Management Service).
+
+=> Scalability and Pricing
+--------------------------
+-> Autoscale
+-> pay per gigabyte of data used
+
+=> Performance and Throughput Modes
+------------------------------------
+-> EFS support thousands of concurrent NFS client and can provide over 10 gigabytes per sec of throughput.
+-> It can scale to petabyte levels automatically.
+
+-> while creating EFS file system, we can choose the perfomance mode:
+1> General purpose(default): Optimized for latency sensitive use cases such as web server and content management system.
+2> Max I/O : Provides higher throughput with higher latency, suitable for big data and media processing applications due to 
+             its high parallelism.
+
+=> Throughput Modes:
+--------------------
+-> EFS offers different throughput mode:
+1> Bursting:
+-> Throughput scales with storage size.
+-> for ex: with one terabyte of storage, we get 50 megabytes per sec plus bursts upto 100 megabytes per sec.
+
+2> Provisioned:
+->  Allows you to set throughput independently of storage size, such as one gigabyte per second for one terabyte of storage.
+
+3> Elsatic:
+-> automatically scale throughput up and down based on workload.
+-> This mode is ideal for unpredictable workloads.
+
+=> Storage Classes and Lifecycle Management:
+--------------------------------------------
+-> EFS provides several storage tiers with lifecycle management features to optimize cost:
+
+1> Standard Tier: For frequently accessed files.
+2> EFS Infrequent Access (EFS-IA): For files accessed less frequently, offering lower storage costs but with retrieval fees.
+3> Archive Storage Tier: For rarely accessed data, such as files accessed only a few times per year, providing significant 
+                         storage cost savings. Lifecycle policies can be configured to automatically move files between tiers 
+                         based on the number of days since last access. For example, a file not accessed for 60 days in the 
+                         Standard tier can be moved to the EFS-IA tier automatically.
