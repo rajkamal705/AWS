@@ -31,6 +31,19 @@ Note: smaller GP2 volumes can burst upto 3000 IOPS. Increasing the volume size i
 -> gp3 allows independent scaling of IOPS and throughput.
 -> gp2 links volume size and IOPS together.
 
+=> EBS multiattach:
+-------------------
+-> The multiattach feature of EBS volume enables attaching the same volume to multiple EC2 instance, within the same 
+   availability zone.
+-> This capability is available exclusively for the io1 and io2 families of EBS volumes.
+-> Each instance attached to the volume has full read and write permissions to this high-performance volume. This means all
+   instances can read and write concurrently.
+-> The primary use case for Multi-Attach is to achieve higher application availability and  when your application manage 
+   concurrent write operations.
+-> Multi-Attach is restricted to a specified availability zone. It does not allow attaching an EBS volume from one 
+   availability zone to another.
+-> Up to 16 EC2 instances can attach to the same volume simultaneously. 
+-> To use Multi-Attach effectively, you must use a cluster-aware file system.
 
 
 

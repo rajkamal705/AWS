@@ -36,3 +36,36 @@ ex: instance1: asia-a1(EBS 50gb) ------------> snapshot of EBS can connect acros
 
 3> FSR(Fast snapshot Restore):
 -> Forceful initialization of snapshot to have no latency on the first use.
+
+=> EBS volume in detail:
+----------------------------
+=> Amazon EBS (Elastic Block Store) is a persistent block-level storage service by AWS that you attach to EC2 instances.
+-> Think of EBS as a virtual hard disk that you attach to your EC2 (virtual computer) in the cloud.
+-> Just like a real hard disk, it stores your operating system, applications, and data (files, databases, logs, etc.).
+
+=> Where is it used?
+-> It is used with EC2 instances to store data that:
+- Persists beyond instance shutdowns
+- Requires fast I/O performance
+- Can be backed up using snapshots
+
+=>  What can EBS store?
+-> EBS volumes can store any kind of data:
+- The OS of your instance (e.g., Linux, Windows)
+- Installed software (e.g., Node.js, Java)
+- Your project files (e.g., code, images)
+- Databases (e.g., MySQL, MongoDB)
+- Logs, backups, temporary files
+- Anything you can store on a normal hard disk
+
+Note: So, it’s just like C:/ or D:/ drive on your personal laptop — but in the cloud.
+
+=> What is an EBS Snapshot?
+-> A snapshot is like taking a photo/backup of your EBS volume.
+- It’s stored in Amazon S3, not on your volume.
+
+-> You can use it to:
+- Backup your volume data
+- Restore the volume if something breaks
+- Create new volumes in the same or other regions
+

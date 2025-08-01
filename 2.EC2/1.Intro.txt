@@ -162,9 +162,21 @@ ans: An IP Address is unique identifier assigned to every device connected to th
 -> So your SSH client doesn’t have the EC2 instance's host fingerprint in its known hosts file.
 -> When you type yes, it adds the host to your known hosts file:
 
-=> Add Role:
-----------------
+=> EC2 instance connect :
+-------------------------
+-> It is alternative to SSH.
+-> This allows us to do a browser-based SSH session into our EC2 instance.
+->  The cool thing is that, session is managed in the browser instead of using a different command line interface such as Terminal.
 
+* Key Takeaways
+- EC2 Instance Connect provides a browser-based SSH session to EC2 instances, simplifying access without managing SSH keys.
+- The default username for Amazon Linux 2 AMI is ec2-user, which is automatically set by AWS.
+- EC2 Instance Connect requires port 22 to be open in the security group's inbound rules for successful connection.
+- This method relies on SSH behind the scenes but eliminates the need for manual SSH key management.
 
- 
-
+=> EC2 instance Roles:
+-> Key Takeaways:
+-  Never enter your IAM Access Key ID and Secret Access Key directly into an EC2 instance.
+-  Use IAM roles to securely provide AWS credentials to EC2 instances.
+-  Attaching an IAM role to an EC2 instance allows AWS CLI commands to execute with the permissions of that role.
+-  Changes to IAM role permissions may take some time to propagate and reflect on the instance.
