@@ -12,6 +12,12 @@
 -> It can connect to many instances(in diff region) simultaneously.
 -> This multi-AZ connectivity enables shared access across distributed instances.
 
+=> Use:
+---------
+-> EFS provides scalable, elastic and shared file storage.
+-> It allows multiple Amazon EC2 instances and other AWS compute resources to access and share the same file system concurrently.
+-> EFS is designed for high throughput and low latency make it suitable for various workloads.
+
 => Use cases and compatibility:
 -------------------------------
 -> EFS is suitable for content management, web serving, data sharing, and application like workpress.
@@ -59,3 +65,13 @@
                          storage cost savings. Lifecycle policies can be configured to automatically move files between tiers 
                          based on the number of days since last access. For example, a file not accessed for 60 days in the 
                          Standard tier can be moved to the EFS-IA tier automatically.
+
+
+Q> EFS vs EBS?
+-> EBS volumes are attached to one instance at a time, except in the edge case of using multi attach feature of io1 and io2 
+   types of volumes.
+-> EBS volumes are attached to a single EC2 instance at a time and are locked to a specific availability zone(AZ).
+-> EBS IO perfomance varies by volume type, with gp3 and io1 allowing independent scalling.
+-> Migrating EBS volumes across AZs region requires creating and restoring snapshots.
+-> EFS is a network file system designed to be shared across multiple instances and AZs, supporting POSIX and suitable for Linux.
+-> EFS has a higher cost but offers storage tiers for cost savings.
