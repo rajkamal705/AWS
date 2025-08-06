@@ -1,0 +1,36 @@
+=> Scalability means that your application system can handle a greater load by distributing your system load.
+1> vertical Scalability
+2> Horizonatal Scalability
+
+1> vertical Scalability:
+------------------------
+-> vertical Scalability means increasing the size or capacity of your instance.
+-> Ex: suppose our EC2 instance is running on t2.micro, on increasing load, we can shift it to t2.large. This is vertical Scalability.
+-> vertical Scalability is commonly used for non distributed system like database.
+-> services like RDS or Elastic cache allow vertical scalling by upgrading the underlying instance types.
+
+2> Horizonatal Scalability:
+--------------------------
+-> Horizonatal scaling means increasing the number of instances or systems for your application.
+-> Horizontal scaling implies distributed systems and is common in web or modern applications. However, not every 
+   application can be distributed.
+
+=> Scalability and High Availability in AWS
+----------------------------------------------
+-> In AWS terms:
+1> Vertical scaling involves increasing instance size, scaling up or down. For example, the smallest instance is t2.nano 
+   with 0.5 GB RAM and 1 vCPU, while the largest is a u-12tb1.metal with 12.3 TB RAM and 450 vCPUs.
+
+2> Horizontal scaling involves increasing or decreasing the number of instances, called scale out or scale in respectively. 
+   This is used with auto scaling groups or load balancers.
+
+3> High availability involves running the same application instance across multiple availability zones, enabled in auto 
+   scaling groups or load balancers.
+
+=> Key Takeaways:
+-------------------
+-> Scalability enables an application system to handle greater load by adapting, either vertically or horizontally.
+-> Vertical scalability involves increasing the size or capacity of a single instance, such as upgrading a server or operator.
+-> Horizontal scalability involves increasing the number of instances or systems, commonly used in distributed systems.
+-> High availability ensures system operation across multiple data centers or availability zones to survive failures, 
+   often linked with horizontal scaling.

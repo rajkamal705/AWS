@@ -1,0 +1,43 @@
+Q> What is a Network Load Balancer (NLB)?
+-> A NLB is a type of load balancer provided by AWS works on layer 4(Transport layer) of OSI model.
+-> This means it can handle TCP and UDP traffic(which are the basic building blocks of most internet communication).
+
+Q> why use NLB?
+-> It is designed for very high performance.
+-> can handle million of requests per sec.
+-> offers very low latency.
+-> Ideal for apps that need speed, stability, and fixed IP addresses.
+
+=> Static IP Addresses and Availability Zones:
+----------------------------------------------
+-> NLP gives you one static IP Address per Availability zone.
+-> you can also assign elastic IPs to make this addresses permanent.
+-> This is useful if your app must always be accessed through a fixed IP.
+
+Q> How NLB works?
+-> NLB sends incoming traffic to target groups.
+-> A target groups can include:
+   1> EC2 instances(Aws virtual machines).
+   2> or private IP Addresses.
+-> This means NLB can route traffic to server inside or outside.
+
+=> Combining NLB with ALB:
+--------------------------
+-> you can place NLB in front of ALB(application load balanacer).
+-> The NLB provides fixed IPs.
+-> The ALB handles complex HTTP routing (like URL-based rules).
+
+=> Health Check:
+----------------
+-> NLB regulary checks if your backend servers are healthy.
+-> It supports health check using: TCP, HTTP, HTTPS
+-> if a server is unhealty, NLB stops sending traffic to it.
+
+=> summary:
+-----------
+-> The Network Load Balancer (NLB) operates at layer 4, handling TCP and UDP traffic with ultra-low latency and high performance.
+-> NLB provides one static IP per availability zone, allowing assignment of elastic IPs for applications requiring fixed IP addresses.
+-> Target groups for NLB can include EC2 instances or hardcoded private IP addresses, including servers in your own data center.
+-> NLB can be placed in front of an Application Load Balancer(ALB) to combine fixed IP benefits with advanced HTTP routing capabilities.
+-> Health checks for NLB target groups support TCP, HTTP, and HTTPS protocols, enabling flexible backend monitoring.
+

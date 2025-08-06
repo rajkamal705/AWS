@@ -1,0 +1,64 @@
+=> GWLB(Gateway Load Balancer):
+-------------------------------
+-> GWLB is a special kind of AWS load balancer used to inspect and control network traffic.
+-> It helps you add security appliances like firewalls, intrusion detection and prevention system, or deep packet inspection
+   systems, payload manipulation etc.
+
+Q> why use GWLB?
+-> when you want all traffic to be filtered or checked before reaching your application.
+-> Useful for security, traffic monitoring, or modifying network packets.
+-> Helps you insert third-party security tools into your AWS traffic flow.
+
+=> How traffic normally flow(Without GWLB):
+-------------------------------------------
+-> User -> ALB -> Application (like EC2, lambda, etc.)
+-> No filtering or inspection - traffic goes straight to your app
+
+=> How traffic flows with GWLB:
+-------------------------------
+1> User sends request.
+2> GWLB recives traffic first.
+3> GWLB sends traffic to virtual applicances like firewalls, etc.
+4> Applicances inspect or modify the service.
+5> if it's safe traffic returned to GWLB.
+6> GWLB forwards it to your actual application.
+Note: This happens without your app knowing - it's transparent.
+
+=> GWLB works at Layer 3(Network Layer):
+----------------------------------------
+-> Lower level than ALB(Layer 7) and NLB(Layer 4):
+-> It works with IP packets, not just HTTP or TCP.
+-> Uses GENEVE protocol on port 6081 to encapsulate traffic(wrap it in a secure shell for inspection).
+
+=> GWLB Target Groups:
+----------------------
+-> These are the security appliances that inspect traffic.
+-> Can be:
+   1> EC2 instances (registered by ID),
+   2> Or private IP addresses (like on-prem servers).
+-> These appliances must be ready to process and forward traffic.
+
+=> Why It's Useful:
+---------------------
+-> Makes it easier to insert security and monitoring into your AWS network.
+-> You don’t have to manually route or manage inspection logic.
+-> Scales automatically with traffic using load balancing.
+
+=> Things to Keep in Mind:
+--------------------------
+-> Setting up GWLB is complex and usually done by advanced users or vendors.
+-> Most AWS users just need to understand how it works, not how to build it from scratch.
+-> You won't need to configure it manually for exams or simple projects.
+
+=> summary:
+-----------
+| Feature          | Simplified Explanation                                            |
+| ---------------- | ----------------------------------------------------------------- |
+| **Purpose**      | To send all network traffic through security tools like firewalls |
+| **Traffic Path** | User → GWLB → Security Appliance → GWLB → App                     |
+| **Layer**        | Works at Layer 3 (IP packet level)                                |
+| **Protocol**     | Uses GENEVE protocol on port 6081                                 |
+| **Target Group** | Virtual appliances (EC2 or private IPs)                           |
+| **Use Cases**    | Firewalls, intrusion detection, packet inspection                 |
+| **Transparency** | Your app doesn't know traffic is being filtered                   |
+

@@ -1,0 +1,63 @@
+=> ALB(Application Load Balancer V2):
+------------------------------------
+1> works at layer 7(Http/ https):
+-> ALB operates at the application layer of OSI model.
+-> It makes decision based on content like URLs, headers, hostname, query string -> perfect for web apps.
+
+2> Distribute traffic to multiple HTTP applications across diff servers:
+-> you can route traffic to different backend serers(target groups) based on rules.
+-> For example, requests to /api go to one group, and /images go to another.
+
+3> can handle multiple apps on the same machine:
+-> ALB can route traffic to different ports on the same server.
+-> For example, if you have two apps on the same EC2 instance — one on port 3000 and another on port 4000 — ALB can route 
+   traffic to each correctly.
+
+4> Supports HTTP/2 and WebSockets:
+-> HTTP/2: Faster, more efficient loading.
+-> WebSockets: For real-time communication like chat apps or live dashboards.
+
+5> Routing features:
+1> Path based routing: 
+-> /users goes to one app, /posts to another.
+
+2> Host-based routing:
+-> api.example.com vs blog.example.com → different targets.
+
+3> Query string & header-based routing
+-> ?platform=mobile vs ?platform=desktop.
+
+6>  Target Groups:
+-> ALB sends traffic to target groups, which can include:
+1> EC2 instances
+2> ECS tasks
+3> Lambda functions (for serverless apps)
+4> Private IPs (e.g., on-prem servers)
+-> ALB uses health checks to monitor which targets are working.
+
+=> Extra features:
+-------------------
+-> ALB gives a fixed DNS hostname (like Classic Load Balancer).
+-> The application server don't see the IP of the client directly:
+   1> The true IP of the client is inserted in the header X-Forwarded-For.
+   2> we can also get Port(X-Forwarded-port)
+   3> X-Forwarded-Proto → Protocol used (HTTP/HTTPS)
+
+=> Notes:
+---------
+-> ALB is ideal for modern web apps using microservices, ECS, and serverless.
+-> It is more flexible than Classic Load Balancer, especially for multiple apps behind a single entry point.
+
+
+=> Practice:
+-------------
+-> we can set our instance to not direcly access using public IP after adding in target groups and attached to load balancer.
+-> we can make the security group of the instance to attached with security group of load balancer.
+-> then instances will be allowed to access only using load balancer DNS link.
+
+-> we can also add rules in our load balancer using listener rules.
+
+
+
+
+

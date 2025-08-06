@@ -1,0 +1,47 @@
+=> ELB(Elastic Load Balancer):
+------------------------------
+-> A load balancer is a server or set of servers that distribute incoming traffic to multiple ec2 instance or server.
+
+ex: suppose we have a ELB which is attached to 3 ec2 instance, so when traffic will come(suppose 30 people), it will distribute
+10 people per instance to minimize load on single server.
+
+=> Benefits of using load balancer:
+-----------------------------------
+1> one point access:
+-> you only need one address to reach your server, even if it's running on multiple servers.
+2> Handles failures automatically:
+-> if one server goes down, the load balancer sends traffic to healthy servers without you doing anything.
+3> check if servers are healthy:
+-> It keep checking which servers are working properly and send traffic to those.
+4> Supports secure websites(Https):
+-> It can manage the security (SSL/HTTPS) so your site stays encrypted and safe.
+5> keep users on the same server(sticky session):
+-> It can make sure returning users always go to the same server, which is useful for things like shopping carts.
+6> High availability:
+-> It helps keep your app running smoothly, even if a part of your system fails or gets too busy.
+7> Separates Public and Private Traffic
+-> It helps manage public (internet) and private (internal) traffic separately, improving security and organization.
+
+=> Elastic load balancer:
+--------------------------
+-> Elastic load balancer is a managed load balancer, which guarantees its operation under all circumstances like:
+   handles upgrades, maintenance, and high availability.
+
+=> Types of Managed Load Balancers on AWS:
+------------------------------------------
+-> There are four kinds of managed load balancers on AWS:
+
+1> Classic Load Balancer (CLB): The older generation from 2009, compatible with HTTP, HTTPS, TCP, SSL, and Security CP. 
+   AWS recommends not using it anymore; it is deprecated in the console but still available.
+
+2> Application Load Balancer (ALB): Introduced around 2016, supports HTTP, HTTPS, and WebSocket protocols.
+
+3> Network Load Balancer (NLB): Introduced in 2017, supports TCP, TLS, Security CP, and UDP protocols.
+4> Gateway Load Balancer (GWLB): Introduced in 2020, operates at the network layer and supports the IP protocol.
+
+=> Key Takeaways:
+-----------------
+1> Load balancers distribute incoming traffic across multiple backend EC2 instances to optimize resource use and improve fault tolerance.
+2> Elastic Load Balancers provide a single endpoint for users, hiding the complexity of backend instances.
+3> Health checks enable the load balancer to route traffic only to healthy instances, enhancing reliability.
+4> AWS offers multiple types of managed load balancers, with newer generations recommended for advanced features and better integration.
