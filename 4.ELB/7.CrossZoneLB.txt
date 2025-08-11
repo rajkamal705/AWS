@@ -1,0 +1,28 @@
+=> Cross zone load balancing:
+-----------------------------
+1> With cross zone load balancing:
+-> each load balancer instance distributes evenly across all registered instances in all AZ.
+
+2> Without crosszone load balaning:
+-> requests are distributed in the instances of the node of the elastic load balancer.
+
+=> Cross zone load balancing:
+-----------------------------
+1> Application Load balancer:
+-> Enabled by default (can be disabled at the target group level).
+-> No charges for enter AZ data.
+
+2> Network load balancer and Gateway load balancer:
+--------------------------------------------------
+-> disabled by default
+-> you pay charges for inter AZ data if enabled.
+
+3> Classic load balancer:
+--------------------------
+-> disabled by default.
+
+=> Pratice:
+-------------
+-> after checking attributes
+-> Edit attribute
+-> Cross zone load balancing onn -> now, the load balancer distribute traffic across targets in all its zone.

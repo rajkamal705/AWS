@@ -1,0 +1,63 @@
+=> SSL(Secure Socket Layer) /TLS (Transport Layer Security):
+------------------------------------------------------------
+-> SSL and TSL are way to encrypt data sent over internet.
+-> This encryption make sure that nobody can see what you're sending and reciving(Like msg, password etc).
+-> TLS is newer and more secure
+
+Q> What is an SSL Certificate?
+------------------------------
+-> An SSL is like identity card for websites, that helps browser know the site is safe.
+-> It’s issued by trusted companies called Certificate Authorities (like GoDaddy, DigiCert, or Let’s Encrypt).
+-> when a website has a valid certificate, you see a lock 🔒 sign in browser.
+
+=> Do SSL Certificates Expire?
+-> Yes. Just like a driver’s license, they expire and must be renewed regularly to keep the website trusted and secure.
+
+=> SSL with Load Balancers:
+---------------------------
+-> A load balancer is like a traffic director for your website that decides which server will handle a request.
+
+=> Here's how SSL works with it:
+--------------------------------
+1> Clients (users) connect to your site using HTTPS (which uses SSL/TLS).
+2> The load balancer decrypts this secure traffic (called SSL termination).
+3> After decrypting, it can send the request to your servers over plain HTTP (inside your private network, which is still safe).
+
+=> What is ACM (AWS Certificate Manager)?
+------------------------------------------
+-> In AWS, you can use ACM to manage SSL certificates.
+-> You can also upload your own certificates if needed
+
+=> What is SNI (Server Name Indication)?
+----------------------------------------
+-> Problem: You want to host multiple websites (like site1.com and site2.com) on one load balancer. But each site 
+   needs its own SSL certificate.
+-> Solution: SNI allows the browser to tell the server which domain it's trying to reach right at the start.
+-> Then the load balancer picks the right SSL certificate to use for that domain.
+Ex: If someone calls a hotel and says they’re meeting “Mr. Smith,” the receptionist knows which room to connect them to.
+
+=> How SNI works with ALB:
+---------------------------
+1> Imagine ALB has two sites:
+👉 www.mycorp.com
+👉 domain1.example.com
+2> Each has its own SSL certificate.
+3> When a client visits one of these, ALB uses SNI to figure out which domain is being requested.
+4> Then it picks the correct SSL certificate and sends the traffic to the correct server (target group).
+
+=> Which Load balancer support what:
+--------------------------------------
+| Load Balancer Type                  | SSL Certificate Support       | SNI Support |
+| ----------------------------------- | ----------------------------- | ----------- |
+| **Classic Load Balancer**           | Only 1 SSL certificate per LB | ❌ No        |
+| **Application Load Balancer (ALB)** | Multiple certificates via SNI | ✅ Yes       |
+| **Network Load Balancer (NLB)**     | Multiple certificates via SNI | ✅ Yes       |
+
+
+=> Summary:
+-----------
+-> SSL/TLS: Encrypts your internet traffic so it’s secure.
+-> Certificates: Prove your website is safe and encrypt data.
+-> Load balancers: Manage traffic and can decrypt SSL traffic.
+-> SNI: Lets one load balancer use different SSL certificates for different websites.
+-> Use ALB or NLB if you need to support multiple domains with HTTPS.

@@ -1,0 +1,49 @@
+=> Connection Draining:
+------------------------
+-> It's feature used in ELB to allow servers(EC2 instances) to finish their ongoing work before being removed.
+-> It ensures that, users don't get disconnected in the middle of request(like during a file upload or payment).
+
+=> Different Names based on load balancer type:
+-> For Classic Load Balancers, it is called Connection Draining.
+-> For Application Load Balancers and Network Load Balancers, it is referred to as Deregistration Delay.
+
+=> Why is it needed?
+-> when you remove or replace an EC2 instance, it might still be handling user request.
+-> If you stop it suddenly, users could face errors, dropped connections, or incomplete transactions.
+-> Connection Draining gives the instance time to finish its current work before shutting down.
+
+=> How it works?
+-> Imagine you have 3 EC2 instances behind a load balancer.
+-> One instance is set to draining mode (being removed or marked unhealthy).
+-> Here's what happens:
+1> ELB stops sending new users to the draining instance.
+2> The draining instance is still allowed to finish active requests from users already connected to it.
+3> After those requests are done or the draining time expires, the instance is fully removed.
+4> Meanwhile, new user requests are only sent to the other healthy instances.
+
+=> Draining Time Configuration:
+-------------------------------
+-> You can set the draining period (how long the instance waits before shutdown).
+-> Valid values: 1 to 3,600 seconds (that’s up to 1 hour).
+-> Default value: 300 seconds (5 minutes).
+-> Disable draining: Set the value to 0 seconds (the instance is removed immediately with no waiting).
+
+Q> When to use low or high draining time.
+-----------------------------------------
+1> Short Requests (like API calls):
+   -> Use a low value like 30 seconds.
+   -> This helps in quickly removing instances without keeping them online too long.
+
+2> Long Requests (like file uploads, video processing, long sessions):
+   -> Use a higher value like 300+ seconds.
+   -> This gives enough time to gracefully finish these longer tasks.
+
+=> Summary:
+-----------
+-> Connection draining: Gracefull shutdown of EC2 instances behind load balancer.
+-> It prevents cutting off active user connection.
+-> It's called:
+   1> "Connection Draining" in Classic Load Balancer.
+   2> "Deregistration Delay" in ALB and NLB.
+-> Draining time is configurable (1 to 3600 seconds). Default is 300 seconds.
+-> Use short draining times for short requests and longer times for long-running ones.

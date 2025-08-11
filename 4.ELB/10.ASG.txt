@@ -1,0 +1,80 @@
+=> ASG(Auto Scaling Group):
+---------------------------
+-> when you run a website or app, the number of visitors can change during the day.
+-> In AWS, you can create or remove EC2 instances quickly using the API.
+-> Instead of doing it manually, AWS gives you Auto Scaling Groups to automate this process.
+-> ASGs can:
+   1> Scale out → Add more EC2 instances when traffic increases.
+   2> Scale in → Remove EC2 instances when traffic decreases.
+-> The number of EC2 instances in the ASG changes over time.
+-> You can set:
+   1> Minimum number of instances → never go below this.
+   2> Maximum number of instances → never go above this.
+-> ASG itself is free — you only pay for the EC2 instances it launches.
+
+=> ASG Capacity Settings:
+--------------------------
+-> When creating an ASG, you set:
+1> Minimum capacity – Lowest number of EC2 instances (e.g., 2).
+2> Desired capacity – The target number of instances you want right now (e.g., 4).
+3> Maximum capacity – The highest number allowed (e.g., 7).
+Note: If your desired capacity goes up (but stays below the max), ASG automatically adds EC2 instances.
+
+=> ASG + Load Balancers
+-------------------------
+-> ASGs often work with an Elastic Load Balancer (ELB).
+-> Example:
+-> If 4 instances are in the ASG, the ELB sends user traffic to all 4 instances.
+-> The ELB runs health checks on instances.
+-> If one instance is unhealthy, ASG terminates it and launches a new one.
+-> When new EC2 instances are added, the ELB starts sending them traffic too.
+-> This combo (ASG + ELB) ensures:
+   1> Even load distribution.
+   2> Automatic replacement of broken instances.
+
+=> Launch template and ASG setup:
+---------------------------------
+-> To create an ASG, you need a launch template(old launch configurations are no longer used).
+-> A Launch Template contains all the details needed to start an EC2 instance:
+   - AMI (Amazon Machine Image)
+   - Instance type
+   - EC2 user data script
+   - EBS volumes
+   - Security groups
+   - SSH key pair
+   - IAM roles for EC2
+   - Network & subnet info
+   - Load balancer info
+
+-> You also configure:
+   - Minimum size
+   - Maximum size
+   - Initial capacity
+   - Scaling policies
+
+=> Scaling Policies & CloudWatch Alarms
+----------------------------------------
+-> ASG can automatically add or remove instances based on CloudWatch alarms.
+-> CloudWatch monitors metrics (like CPU usage) and triggers alarms.
+-> ASG has 3 instances:
+   1> CloudWatch alarm says CPU usage is too high.
+   2> ASG scales out → adds more EC2 instances automatically.
+   3> If CPU usage drops too low, ASG scales in → removes some instances.
+
+-> You can create:
+   - Scale-out policies → add instances.
+   - Scale-in policies → remove instances.
+
+=> Summary:
+-----------
+-> Auto Scaling Groups automatically change the number of EC2 instances based on load.
+-> They add instances when traffic increases (scale out) and remove them when traffic drops (scale in).
+-> They work with minimum and maximum limits you set.
+-> When combined with a load balancer, ASG:
+   - Spreads traffic evenly.
+   - Replaces unhealthy instances automatically.
+-> Scaling actions are triggered by CloudWatch alarms based on metrics like CPU usage.
+
+
+
+
