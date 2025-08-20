@@ -1,0 +1,30 @@
+Intro:
+-------
+Q> What Serverless Means
+- You do not provision or manage servers.
+- Servers still exist but are invisible to the developer.
+- Services scale automatically based on demand.
+- You pay only for what you use.
+
+=> AWS Serverless Architecture Example
+--------------------------------------
+-> Consider a typical AWS serverless application architecture:
+- Users access static content hosted on Amazon s3 bucket.
+- content delivery is enhanced using Amazon CloudFront.
+- User authentication and identity management is handled by Amazon Cognito.
+- Users invoke REST APIs through Amazon API Gateway.
+- API Gateway triggers AWS Lambda functions.
+- Lambda functions interact with Amazon DynamoDB to store and retrieve data.
+Note: This above architecture demonstrates how various AWS services integrate to provide a fully serverless application.
+
+=> Additional AWS Serverless Services
+---------------------------------------
+-> Beyond Lambda and DynamoDB, AWS offers several other serverless services:
+1> Amazon S3: Object storage service for static content.
+2> Amazon SNS and SQS: Messaging services that scale automatically without server management.
+3> Amazon Kinesis Data Firehose: Data streaming service that scales based on throughput.
+4> Amazon Aurora Serverless: A serverless relational database that scales on demand.
+5> AWS Step Functions: Orchestration service for serverless workflows.
+6> AWS Fargate: Serverless compute engine for containers, eliminating the need to provision infrastructure for Docker containers.
+
+Note: All these above services allow developers to focus on application logic without managing underlying servers.

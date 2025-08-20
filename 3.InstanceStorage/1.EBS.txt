@@ -1,4 +1,5 @@
 => EBS (Elastic Block Store):
+-----------------------------
 -> EBS is a network drive you can attach to your instances when they run.
 -> It allows your instances to persist data, even after their termination.
 -> They can only be mounted to one instance at a time(at the CCP level).
@@ -12,6 +13,15 @@
 -> It is locked to single availability zone. To move a volume across, you have to snapshot it first.
 -> Have a provisioned capacity: you can get billed for that. you can increase the capacity of the drive over time.
 -> a single instance can attached with one or more EBS.
+
+Q> How to create EBS for other region from snapshot?
+-> After you take a snapshot:
+-> Go to Snapshots in the AWS console.
+-> first copy snapshot in the region where you want to create volume from that snapshot.
+-> Click Create Volume from Snapshot.
+-> In the "Availability Zone" dropdown, choose the target AZ.
+-> AWS will create a new EBS volume in that AZ.
+-> You can now attach that new volume to an EC2 instance in the new AZ.
 
 => EBS -> Delete on termination attribute.
 -> This shows that on deleting instance, EBS volume attached with that instances will also get deleted, if Delete on termination 

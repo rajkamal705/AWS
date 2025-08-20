@@ -22,10 +22,11 @@ Q> What actually happen in serverless?
    millisec is taken to awake from sleep state to running state.
 -> Once user stop using resources -> server will again go in sleep mode.
 -> bec of this, Serverless don't manage the state. To manage state, we have to use reddis or something.
+-> In case of increase of incoming request, it auto-scale the server to minimize load. 
 
 
 => lambda
-----------
+-----------
 -> Suppose you upload your code directly or use some deployment tools like serverless framework.
 -> Lambda will waits for an event call:
    It gets triggered by: 1> API Gateway(For Http req) 2> DynamoDb 3> cloudwatch 4>  SNS & SQS(for message)

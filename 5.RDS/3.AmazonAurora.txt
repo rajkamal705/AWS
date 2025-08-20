@@ -1,0 +1,70 @@
+=> Amazon Aurora Overview:
+---------------------------
+-> It is a database service created by aws.
+-> It’s not open source but works just like MySQL or PostgreSQL, so you can use the same tools and drivers.
+
+Q> Why it's faster?
+-> Aurora is optimized for the cloud.
+-> It’s about 5× faster than MySQL on RDS and 3× faster than PostgreSQL on RDS.
+-> AWS uses special internal optimizations (details are hidden from users).
+
+=> Storage Auto Scaling:
+------------------------
+-> Automatic Storage Growth.
+   - Starts with 10 GB and can grow up to 128 TB automatically.
+   - You don’t need to manually watch or add disk space — it grows as data is added.
+
+=> Read Replicas and Speed:
+---------------------------
+-> You can have up to 15 read replicas (copies of your database for read-only queries).
+-> Replication is very fast — usually less than 10 milliseconds delay.
+-> Failover (switching to another replica if the main one fails) is almost instant, faster than MySQL RDS Multi-AZ failover.
+
+=> High Availability:
+--------------------
+1> Six copies of data:
+   -> Aurora stores 6 copies of your data across 3 Availability Zones.
+   -> Writes: Needs at least 4 of 6 copies to be available.
+   -> Reads: Needs at least 3 of 6 copies to be available.
+   -> This makes it resilient if an AZ goes down.
+
+2> Self Healing:
+   -> If a piece of data gets corrupted, Aurora fixes it automatically by copying from healthy replicas.
+
+3> Striped Storage:
+   -> Your data is split into many small volumes (hundreds).
+   -> These are spread across different servers for safety and performance.
+   -> You don’t manage this — AWS does it automatically.
+
+=> Aurora Architecture:
+-----------------------
+Q> How it works?
+-> There’s one master instance for writes.
+-> If the master fails, Aurora promotes a read replica to master in <30 seconds.
+-> Up to 15 read replicas can serve read requests.
+-> Any read replica can be promoted to master.
+-> Read replicas can also be in different regions (cross-region replication).
+
+=> Endpoints for Connections:
+----------------------------
+1> Write Endpoints:
+-> A fixed DNS name for the master instance.
+-> If failover happens, it points to the new master automatically.
+
+2> Reader Endpoints:
+-> A fixed DNS name for all read replicas.
+-> Distributes incoming connections across replicas (connection-level load balancing).
+-> Makes it easier to add/remove replicas without changing app code.
+
+=> Extra Feature:
+----------------
+1> Cost:
+   -> Aurora costs about 20% more than standard RDS.
+   -> But it’s more efficient, so at scale, it can be cheaper.
+2> Backtrack:
+   -> Lets you restore the database to a specific time without restoring from backups.
+   -> Example: Go back to yesterday at 4:00 PM.
+3> Other features:
+   -> Automatic failover.
+   -> Backup & restore.
+   -> Security and compliance.

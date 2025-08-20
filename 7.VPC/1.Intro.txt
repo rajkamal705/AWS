@@ -1,0 +1,64 @@
+=> VPC(virtual private cloud):
+------------------------------
+-> Think of it as your own private network inside AWS.
+-> It is regional → every AWS region has its own VPC.
+
+=> Subnets inside VPC:
+----------------------
+-> subnets are smaller section inside a VPC.
+-> They are created at the availability zone level.
+-> Two types of subnets:
+   1> public subnet: Connected to the internet(can send and receive traffic).
+   2> private subnet: Not directly connected to the internet(no direct access from outside).
+
+=> Route Tables:
+----------------
+-> This decide, how traffic move between subnets and the internet.
+Ex: 
+-> Public subnet has a route to the internet.
+-> Private subnet has no direct route to the internet (only internal communication).
+
+=> VPC Architecture:
+--------------------
+1> CIDR Range:
+- The VPC has a set of IP ranges called a CIDR range, which defines the allowed IP addresses within your VPC.
+
+2> Across availability zone:
+- Usually, companies use multiple AZs for high availability.
+- In each AZ you can have both public and private subnets.
+- you can launch EC2 instances in any subnet you choose.
+
+3> Default VPC:
+- AWS creates a default VPC in every region for you.
+- By default, it has only public subnets (no private subnets).
+
+=> Internet Gateways(IGW) and NAT Gateways
+------------------------------------------
+1> Internet Gateway(IGW):
+- A door that connects your VPC to the internet.
+- If subnet has a route to IGW - it becomes public subnet.
+- Example: EC2 in public subnet → can directly access the internet and can also be accessed from the internet.
+
+2> Private Subnet Problem:
+- EC2 in a private subnet cannot directly access the internet.
+- But sometimes, it still needs internet (e.g., for updates).
+- We want outbound access only, not inbound.
+
+3> NAT (Network Address Translation):
+- Solution for private subnets to access the internet securely.
+- Two Options:
+  1> NAT Gateway: AWS-managed (scales automatically, less work for you).
+  2> NAT Instance: Self managed EC2 instance acting as NAT(more control, but you manage scaling/updates).
+
+4> How NAT Works:
+- The NAT Gateway or NAT instance is deployed in a public subnet.
+- Then, a route is created from the private subnet to the NAT Gateway or instance
+- Since the NAT resides in the public subnet, it has a route to the Internet Gateway.
+- Therefore, private subnets can access the internet through the NAT, maintaining their privacy.
+
+=> Key Takeaways:
+------------------
+- A VPC (Virtual Private Cloud) is a private network within the AWS cloud that allows resource deployment and is regional.
+- Subnets partition a VPC at the availability zone level and can be public (internet accessible) or private (not internet accessible).
+- Route tables define network traffic flow between subnets and to the internet.
+- Internet Gateways enable public subnets to access the internet, while NAT Gateways allow private subnets to access the internet securely without inbound internet access.

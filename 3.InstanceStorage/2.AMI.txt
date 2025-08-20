@@ -14,7 +14,7 @@
 -> Build an AMI - this will also create EBS snapshots behind the scene.
 -> finally, we can Launch instances from other AMIs.
 -> Suppose we created an EC2 instance in any particular region suppose eu-east-1a, so after customization of this EC2 instance, 
-   you can create AMI from it. This will be our custom AMI. Then we can lauch the copy of that instance in other region,
+   you can create AMI from it. This will be our custom AMI. Then we can launch the copy of that instance in other region,
    we can say eu-eash-1b.
 
 => Key Takeaways

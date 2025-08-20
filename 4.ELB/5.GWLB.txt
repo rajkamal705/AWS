@@ -51,7 +51,7 @@ Note: This happens without your app knowing - it's transparent.
 -> You won't need to configure it manually for exams or simple projects.
 
 => summary:
------------
+------------------
 | Feature          | Simplified Explanation                                            |
 | ---------------- | ----------------------------------------------------------------- |
 | **Purpose**      | To send all network traffic through security tools like firewalls |

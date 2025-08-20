@@ -1,0 +1,70 @@
+=> RDS Read replicas:
+---------------------
+-> Read replicas, as the name indicates, help you to scale your read operations.
+-> Consider an application connected to an RDS database instance that performs both reads and writes.
+-> When the main database instance cannot scale enough due to too many requests, you can create up to 15 Read Replicas.
+-> These replicas can be within the same availability zone, across availability zones, or even across regions.
+
+-> Purpose: Scale read operations (make reading from the database faster by adding more copies).
+-> You can create up to 15 Read Replicas.
+-> Deplyment Options: 1> Same Availability Zone (AZ) 2> Different AZ in the same region 3> Different AWS Region (cross-region)
+-> Replication is asynchronous → data is eventually consistent : This means a Read Replica may not have the very latest data
+   immediately after a write.
+-> Good for heavy read workloads (like reports, analytics).
+-> Can be promoted to a standalone database (can then do writes).
+-> Application must update connection strings to use the replicas.
+-> Only SELECT queries are allowed on Read Replicas (no INSERT, UPDATE, DELETE).
+-> Cost: 
+       1> Replication traffic between AZs in the same region → Free.
+       2> Replication traffic across regions → Charged.
+
+=> Example use case:
+----------------------
+-> Your main database handles both reads and writes.
+-> A reporting team wants to run heavy queries.
+-> Instead of connecting them to the main DB (which may slow it down), you create a Read Replica.
+-> The reporting team reads from the replica so the main app is unaffected.
+
+
+=> RDS Multi AZ:
+----------------
+-> Purpose: Disaster recovery & high availability, not scaling.
+-> Setup:
+   - Master DB in one AZ.
+   - Standby DB in another AZ.
+-> Replication is synchronous: standby always has the same data as master.
+-> The application uses one DNS name to connect.
+-> If the master fails: 
+   1> AWS automatically fails over to standby.
+   2> Application reconnects automatically (same DNS).
+-> Standby DB cannot be read from or written to during normal operations.
+-> Protects against:
+   1> AZ failures
+   2> Network issues
+   3> Instance or storage failures
+
+=> Combining Both
+-----------------
+-> You can make Read Replicas that are also Multi-AZ for both scaling reads and disaster recovery.
+
+=> Switching from Single-AZ to Multi-AZ:
+-----------------------------------------
+-> No downtime.
+-> Steps AWS takes automatically:
+   1> Take a snapshot of the main DB.
+   2> Restore it in a new standby DB in another AZ.
+   3> Synchronize both databases.
+-> Once sync is done, Multi-AZ is ready.
+
+
+=> Key Differences:
+--------------------
+=> | Feature            | Read Replicas        | Multi-AZ          |
+| ------------------ | -------------------- | ----------------- |
+| Purpose            | Scale reads          | Disaster recovery |
+| Replication type   | Asynchronous         | Synchronous       |
+| Can be read from   | Yes                  | No                |
+| Can be written to  | No (unless promoted) | No                |
+| Scaling benefit    | Yes                  | No                |
+| Automatic failover | No                   | Yes               |
+| Max replicas       | 15                   | 1 standby         |

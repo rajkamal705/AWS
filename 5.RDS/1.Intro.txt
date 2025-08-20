@@ -1,0 +1,61 @@
+=> RDS(Relational Database Sevice):
+-----------------------------------
+-> It is a managed database service designed for databases that use sql as their query language.
+-> SQL is a structured language widely used across many database engines.
+-> With amazon RDS we can create database in the cloud managed by aws.
+
+=> Supported Database engines:
+------------------------------
+-> Amazon RDS supports several database engines including:
+1> PostgreSQL
+2> MySQL
+3> MariaDB
+4> Oracle
+5> Microsoft SQL Server
+6> IBM DB2
+7> Aurora (a proprietary AWS database engine that will be studied in depth)
+
+=> Why Use Amazon RDS Instead of Self-Managed Databases?
+--------------------------------------------------------
+-> While it is possible to deploy your own database service on an EC2 instance, Amazon RDS offers a fully managed 
+    service with many advantages:
+1> Automated provisioning of the database.
+2> Automated operating system patching.
+3> Continuous backups with the ability to restore to a specific timestamp (Point in Time Restore)
+4> Monitoring dashboards to view database performance
+5> Support for read replicas to improve read performance
+6> Multi-AZ deployments for disaster recovery
+7> Maintenance windows for upgrades
+8> Scaling capabilities both vertically (increasing instance type) and horizontally (adding read replicas)
+9> Storage backed by Elastic Block Store (EBS)
+
+Note: One limitation is that you can't SSH into the underlying RDS instances, as aws manage the infrastructure.
+      This is not a disadvantage because it removes the need to manage the underlying EC2 instances yourself.
+
+=> RDS Storage Auto Scaling:
+----------------------------
+-> A notable feature of Amazon RDS is Storage Auto Scaling.
+-> When creating an RDS database, you specify the initial storage size, for example, 20 gigabytes.
+-> If your database usage increases and you approach the allocated storage limit, RDS can automatically scale the 
+   storage without any manual intervention or downtime.
+-> This feature is especially useful for applications with unpredictable workloads. as it prevents running out of storage
+   space and the need to manually increase storage.
+
+=> To use Storage Auto Scaling, you must set a maximum storage threshold to prevent unlimited growth. The storage will 
+   automatically increase if the following conditions are met:
+1> Free storage is less than 10% of the allocated storage.
+2> The low storage condition has persisted for more than five minutes.
+3> At least six hours have passed since the last storage modification
+
+=> Conclusion:
+-> Amazon RDS provides a robust, managed relational database service with automation for provisioning, maintenance, 
+   scaling, and backups. Its Storage Auto Scaling feature enhances flexibility for applications with variable workloads. 
+   While direct access to the underlying instances is not provided, the managed nature of RDS simplifies database operations
+   significantly.
+
+=> Key Takeaways:
+------------------
+-> Amazon RDS is a managed relational database service supporting multiple SQL engines.
+-> RDS automates provisioning, patching, backups, monitoring, and scaling.
+-> Storage Auto Scaling allows automatic increase of storage based on usage thresholds.
+-> RDS does not provide SSH access to underlying instances, emphasizing its managed nature.

@@ -1,0 +1,30 @@
+=> NACL (Network Access Control List):
+-------------------------------------
+- Acts as firewall at subnet level.
+- Controls traffic in and out of subnets.
+- Supports both Allow and Deny rules.
+- Rules are based on IP addresses only.
+- Stateless → must allow both inbound and outbound separately.
+- Example: You can block traffic from a specific IP range at subnet level.
+- Default VPC → comes with a default NACL that allows all inbound and outbound traffic.
+
+=> Security Groups (SG):
+-------------------------
+- Acts as a firewall at the instance/ENI (Elastic Network Interface) level.
+- Controls traffic directly to EC2 instances.
+- Supports only Allow rules (no deny).
+- Rules can reference IP addresses or other Security Groups.
+- Stateful → if inbound traffic is allowed, return traffic is automatically allowed (and vice versa).
+- Provides the second layer of defense (after NACL).
+
+=> NACL vs Security Group (Quick Comparison):
+---------------------------------------------
+1> Attachment level:
+   - NACL → Subnet level.
+   - SG → Instance/ENI level.
+2> Rule Types:
+   - NACL → Allow + Deny.
+   - SG → Only Allow.
+3> Statefulness:
+   - NACL → Stateless (need rules for both directions).
+   - SG → Stateful (return traffic auto-allowed).
